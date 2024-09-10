@@ -4,8 +4,37 @@ const EventList = () => {
       <h1>App Lifecycle Events</h1>
       <ul>
         <li>app_launched</li>
+          const trackEvents = useTrackEvent("App Launched");
+        
+            trackEvents({
+              event: "app_launched",
+              properties: {
+                time: new Date().toISOString(),
+              },
+            });
+        
         <li>app_install</li>
+
+         const trackEvents = useTrackEvent("App Launched");
+        
+            trackEvents({
+              event: "app_install",
+              properties: {
+                time: new Date().toISOString(),
+              },
+            });
+        
         <li>app_uninstall</li>
+
+           const trackEvents = useTrackEvent("App Launched");
+        
+            trackEvents({
+              event: "app_uninstall",
+              properties: {
+                time: new Date().toISOString(),
+              },
+            });
+        
       </ul>
 
       <h1>App Screen Events</h1>
