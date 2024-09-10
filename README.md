@@ -37,6 +37,7 @@ export default function useTrackEvent(eventName: string) {
     (properties?: MixpanelProperties) => {
       try {
         mixpanel.track(eventName, properties);
+        
       } catch (e) {
         console.error(e);
       }
@@ -76,3 +77,22 @@ export default function useTrackEvent(eventName: string) {
           });
         }
       }}
+
+
+-------------------
+
+const trackEvents = useTrackEvent("SignedIn");
+  const [SignWithApple, CUA] = useLazyQuery(SIGN_WITH_APPLE, {
+    async onCompleted(data) {
+      mixpanel.identify(data?.LoginUserWithApple._id);
+      mixpanel.getPeople().set("$name", data?.LoginUserWithApple.name);
+      mixpanel.getPeople().set("$email", data?.LoginUserWithApple.email);
+
+      trackEvents({
+        event: "SignedIn",
+        properties: {
+          time: new Date().toISOString(),
+          screen: route.name,
+          type: "Apple",
+        },
+      });
