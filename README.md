@@ -21,7 +21,7 @@ const mixpanel = new Mixpanel(
 );
 
 mixpanel.init();
-mixpanel.registerSuperProperties({ Source: "App" });    // this needs to be dynamic based on android or ios
+mixpanel.registerSuperProperties({ Source: "App" },{ screen: currentRouteName,});    // this needs to be dynamic based on android or ios [super prop]
 
 export default mixpanel;
 
@@ -74,6 +74,8 @@ export default function useTrackEvent(eventName: string) {
               screen: currentRouteName,
               previousScreen: previousRouteName,
             },
+            screen: currentRouteName,
+            previousScreen: previousRouteName,
           });
         }
       }}
@@ -95,4 +97,5 @@ const trackEvents = useTrackEvent("SignedIn");
           screen: route.name,
           type: "Apple",
         },
+           type: "Apple",
       });
